@@ -7,7 +7,25 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run build
-  test:
+  acceptance_test_1:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - run: echo "RUN acceptance_test_1"
+  acceptance_test_2:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - run: echo "RUN acceptance_test_2"
+  acceptance_test_3:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - run: echo "RUN acceptance_test_3"
+  deploy:
     docker:
       - image: circleci/node:8.10
     steps:
@@ -19,4 +37,21 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test
+      - acceptance_test_1:
+          requires:
+            - build
+      - acceptance_test_2:
+          requires:
+            - build
+      - acceptance_test_3:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - acceptance_test_1
+            - acceptance_test_2
+            - acceptance_test_3
+          filters:
+            branches:
+              only:
+                - /branch-.*/

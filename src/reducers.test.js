@@ -21,7 +21,7 @@ describe('searchComics reducer', () => {
       })
     ).toEqual(
       {
-        searchField: "abcd"
+        searchField: "abc"
       }
     )
   })
