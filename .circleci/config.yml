@@ -7,6 +7,9 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run build
+    filters:
+      branches:
+        - master
   test:
     docker:
       - image: circleci/node:8.10
@@ -14,6 +17,9 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run test
+    filters:
+      branches:
+        - develop
 workflows:
   version: 2
   build_and_test:
