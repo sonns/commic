@@ -51,3 +51,7 @@ workflows:
             - acceptance_test_1
             - acceptance_test_2
             - acceptance_test_3
+          filters:
+            branches:
+              only:
+                - /branch-.*/
